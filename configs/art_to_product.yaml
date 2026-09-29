@@ -1,0 +1,37 @@
+# Secondary/ablation experiment: Art -> Product, a smaller and visually milder
+# shift than Real World -> Clipart, useful for comparing how the method
+# behaves across different degrees of domain shift.
+
+source_domain: "Art"
+target_domain: "Product"
+data_root: "data/raw"
+cache_root: "data/cache"
+results_root: "results"
+val_split: 0.2
+seed: 42
+
+model_name: "microsoft/beit-base-patch16-224"
+pooling: "cls"
+batch_size: 64
+device: "auto"
+
+normalize_prototypes: true
+distance: "cosine"
+
+mean_shift_kernel: "gaussian"
+bandwidth_quantile: 0.3
+mean_shift_max_iter: 100
+mean_shift_tol: 0.0001
+
+confidence_metric: "margin"
+confidence_threshold: 0.05
+min_points_per_class: 3
+
+epsilon: 0.013
+alpha_max: 0.3
+alpha_schedule: "constant"
+alpha_shrink_factor: 0.5
+min_alpha: 0.001
+num_rounds: 10
+guard_strategy: "global_backtrack"
+save_every_round: false
